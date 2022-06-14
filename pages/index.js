@@ -1,25 +1,7 @@
-import Postbox from '../components/Postbox'
 import axios from 'axios'
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import Link from 'next/link';
 export default function Home({posts}) {
-  const router = useRouter()
-  const [del,setDel]=useState(true)
-  const deletePost = async(id)=>{
-    try {
-      const res = await axios(`/api/post/${id}`,{
-        method:'DELETE'
-      });
-      router.push('/')
 
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  const confirmDelete=(id)=>{
-    deletePost(id)
-  }
   return (
     <div className='grid grid-cols-6 overflow-x-hidden'>
       <div className='col-start-2 col-end-5'>
@@ -29,7 +11,7 @@ export default function Home({posts}) {
         {posts.map((posts)=>{
           return(
               <div className=''> 
-            <p className='text-xl shadow-lg rounded-lg p-2 m-2'>
+            <p className='text-xl shadow-lg rounded-lg p-2 m-2' key={posts._id}>
               {posts.newPost}
             </p>
             <div className='flex justify-between'>
@@ -51,11 +33,15 @@ export default function Home({posts}) {
   )
 }
 
-export async function getServerSideProps() {
-  const res = await axios('/api/post/')
-  const {posts} = res.data
+export async function getServerSideProps(context) {
+  const { req } = context;
+  if (req) {
+    let host = req.headers.host // will give you localhost:3000
+  const response = await axios(`http://${host}/api/post/`)
+  const {posts} = response.data
 
   return {
    props: {posts:posts},
   }
+}
 }

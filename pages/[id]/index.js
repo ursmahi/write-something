@@ -1,12 +1,12 @@
 import React from 'react'
 import {useRouter} from 'next/router'
 import axios from 'axios'
-function eachPost({post}) {
+function EachPost({post,host}) {
     const router = useRouter()
     const id = router.query.id
     const  deletePost=async()=>{
         try {
-            const res = await axios(`/post/${id}`,{
+            const res = await axios(`http://${host}/api/post/${id}`,{
             method:'DELETE'});
             router.push('/')
         } catch (error) {
@@ -16,7 +16,7 @@ function eachPost({post}) {
   return (
     <div className='grid grid-cols-6 overflow-x-hidden'>
     <div className='col-start-2 col-end-5'>
-          <p className='text-xl shadow-lg rounded-lg p-2 m-2'>
+          <p className='text-xl shadow-lg rounded-lg p-2 m-2' key={post.newPost}>
             {post.newPost}
           </p>
           <div className='flex justify-between'>
@@ -29,15 +29,17 @@ function eachPost({post}) {
   )
 }
 
-export async function getServerSideProps({params}){
+export async function getServerSideProps(context){
+  const { req,params } = context;
+  if (req) {
+    let host = req.headers.host // will give you localhost:3000
     const id = params.id;
-    const res = await axios(`/api/post/${id}`)
-    const {post} = res.data
-
+  const response = await axios(`http://${host}/api/post/${id}`)
+    const {post} = response.data
     return {
-     props: {post:post},
+     props: {post:post,host:host},
     }
 }
+}
 
-
-export default eachPost;
+export default EachPost;

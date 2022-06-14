@@ -4,7 +4,7 @@ import Post from "../../../models/Post"
 
 dbConnect()
 
-export default  async(req,res)=>{
+export default out=  async(req,res)=>{
     const {method}=req
 
     switch (method) {

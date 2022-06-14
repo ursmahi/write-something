@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-function editPost({posts}) {
+function EditPost({posts,host}) {
     const router = useRouter()
     const id = router.query.id
     const [userInput,setUserInput] = useState({
@@ -11,7 +11,7 @@ function editPost({posts}) {
     const handleForm=async(e)=>{
         e.preventDefault()
         try {
-            const res = await axios(`/api/post/${id}`, {
+            const res = await axios(`http://${host}/api/post/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -37,14 +37,17 @@ function editPost({posts}) {
   )
 }
 
-export async function getServerSideProps({params}) {
-    const id = params.id
-    console.log(id)
-  const res = await axios(`/api/post/${id}`)
-  const {post} = res.data
-return {
-props: {posts:post}, 
-}
-}
+export async function getServerSideProps(context){
+    const { req,params } = context;
+    if (req) {
+      let host = req.headers.host // will give you localhost:3000
+      const id = params.id;
+    const response = await axios(`http://${host}/api/post/${id}`)
+      const {post} = response.data
+      return {
+       props: {posts:post,host:host},
+      }
+  }
+  }
 
-export default editPost;
+export default EditPost;

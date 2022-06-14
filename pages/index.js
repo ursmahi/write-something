@@ -10,17 +10,17 @@ export default function Home({posts}) {
         <div className='flex flex-col-reverse'>
         {posts.map((posts)=>{
           return(
-              <div className=''> 
-            <p className='text-xl shadow-lg rounded-lg p-2 m-2' key={posts._id}>
+              <div className='' key={posts._id}> 
+            <p className='text-xl shadow-lg rounded-lg p-2 m-2' >
               {posts.newPost}
             </p>
             <div className='flex justify-between'>
-            <Link href={`/${posts._id}/edit`}>
-            <button className='m-5 bg-green-500 rounded-full text-white p-2 font-bold hover:bg-green-600 hover:shadow-lg'> EDIT</button>
+            <Link href={`/${posts._id}/edit`} >
+            <button  className='m-5 bg-green-500 rounded-full text-white p-2 font-bold hover:bg-green-600 hover:shadow-lg'> EDIT</button>
             </Link>
             <div>
-               <Link href={`/${posts._id}`}>
-               <button className='m-5 bg-red-500 rounded-full text-white p-2 font-bold hover:bg-red-600 hover:shadow-lg'> Delete</button>
+               <Link href={`/${posts._id}`} >
+               <button  className='m-5 bg-red-500 rounded-full text-white p-2 font-bold hover:bg-red-600 hover:shadow-lg'> Delete</button>
                </Link>
               </div>
             </div>

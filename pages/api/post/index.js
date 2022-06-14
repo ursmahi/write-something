@@ -4,7 +4,7 @@ import Post from "../../../models/Post"
 
 dbConnect()
 
-export default out=  async(req,res)=>{
+const out=  async(req,res)=>{
     const {method}=req
 
     switch (method) {
@@ -29,3 +29,4 @@ export default out=  async(req,res)=>{
     }
 
 }
+export default out;

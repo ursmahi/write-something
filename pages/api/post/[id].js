@@ -3,7 +3,7 @@ import Post from "../../../models/Post";
 
 dbConnect()
 
-export default out= async(req,res)=>{
+const out= async(req,res)=>{
     const {
         query :{id},
         method}=req
@@ -45,3 +45,4 @@ export default out= async(req,res)=>{
             break;
     }
 }
+export default out

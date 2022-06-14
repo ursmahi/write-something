@@ -6,7 +6,7 @@ function EachPost({post,host}) {
     const id = router.query.id
     const  deletePost=async()=>{
         try {
-            const res = await axios(`http://${host}/api/post/${id}`,{
+            const res = await axios(`/api/post/${id}`,{
             method:'DELETE'});
             router.push('/')
         } catch (error) {
@@ -34,7 +34,7 @@ export async function getServerSideProps(context){
   if (req) {
     let host = req.headers.host // will give you localhost:3000
     const id = params.id;
-  const response = await axios(`http://${host}/api/post/${id}`)
+  const response = await axios(`/api/post/${id}`)
     const {post} = response.data
     return {
      props: {post:post,host:host},

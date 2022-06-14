@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
   const { req } = context;
   if (req) {
     let host = req.headers.host // will give you localhost:3000
-  const response = await axios(`http://${host}/api/post/`)
+  const response = await axios(`/api/post/`)
   const {posts} = response.data
 
   return {

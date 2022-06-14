@@ -11,7 +11,7 @@ function EditPost({posts,host}) {
     const handleForm=async(e)=>{
         e.preventDefault()
         try {
-            const res = await axios(`http://${host}/api/post/${id}`, {
+            const res = await axios(`/api/post/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -42,7 +42,7 @@ export async function getServerSideProps(context){
     if (req) {
       let host = req.headers.host // will give you localhost:3000
       const id = params.id;
-    const response = await axios(`http://${host}/api/post/${id}`)
+    const response = await axios(`/api/post/${id}`)
       const {post} = response.data
       return {
        props: {posts:post,host:host},

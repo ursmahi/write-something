@@ -15,7 +15,7 @@ function EachPost({post,host}) {
     }
   return (
     <div className='grid grid-cols-6 overflow-x-hidden'>
-    <div className='col-start-2 col-end-5 lg:col-start-1 lg:col-end-7'>
+    <div className='col-start-1 col-end-7 md:col-span-2 lg:col-start-2 lg:col-end-5'>
           <p className='text-xl shadow-lg rounded-lg p-2 m-2' >
             {post.newPost}
           </p>

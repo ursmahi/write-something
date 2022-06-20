@@ -4,7 +4,7 @@ export default function Home({posts}) {
 
   return (
     <div className='grid grid-cols-6 overflow-x-hidden'>
-      <div className='col-start-2 col-end-5'>
+      <div className='col-start-2 col-end-5 sm:col-start-1 sm:col-end-7'>
         <p className='text-md m-5 font-bold'>Recent Posts from Anonymous users</p>
         {/* <Postbox /> */}
         <div className='flex flex-col-reverse'>

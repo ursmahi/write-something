@@ -25,7 +25,7 @@ function Newpost() {
     }
     return (
         <div className='grid grid-cols-6'>
-            <div className='col-start-2 col-end-5 mt-10 sm:col-start-1 sm:col-end-7'>
+            <div className='col-start-2 col-end-5 mt-10 lg:col-start-1 lg:col-end-7'>
             <form className='flex flex-1 flex-col' onSubmit={handleForm}>
                
                 <textarea  id="var_1" rows="5" cols="10" wrap="soft" value={userInput} onChange={(e) => { setUserInput(e.target.value) }} type='text' placeholder="What's on your mind .." className='resize-none overflow-hidden h-auto rounded-2xl p-2 shadow-md w-full text-xl  outline-none' maxLength='256'></textarea>

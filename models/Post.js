@@ -5,6 +5,10 @@ const PostSchema = new mongoose.Schema({
         type:String,
         required:[true,"Should Not be blank"],
         maxlength:[256,"Only 256 Character allowed"]
+    },
+    reply:{
+        type:Array,
+        maxlength:[256,"Only 256 Character allowed"]
     }
 })
 

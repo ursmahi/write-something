@@ -2,12 +2,10 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-function EditPost({posts,host}) {
+function RepliesPost({posts,host}) {
     const router = useRouter()
     const id = router.query.id
-    const [userInput,setUserInput] = useState({
-        'newPost':posts.newPost
-    })
+    const [userInput,setUserInput] = useState('')
     let axios_url =' '
     if (host.startsWith("localhost")){
       axios_url = `http://${host}/api/post/${id}`
@@ -26,22 +24,44 @@ function EditPost({posts,host}) {
                     "Content-Type": "application/json"
                 },
                 data: JSON.stringify({
-                    'newPost':userInput.newPost})
+                    'newPost':posts.newPost,
+                    'reply':[...posts.reply,userInput] })
             })  
             router.push('/')
         } catch (error) {
-            
         }
+    }
+    const ret=()=>{
+        return(
+            posts.reply.map((reply)=>{
+                return(
+                  <div className="flex justify-center mb-4">
+                  <div className="block p-6 rounded-lg shadow-lg bg-white w-full ">
+                    <p className="text-gray-700 text-base mb-4 font-bold">
+                      {reply}
+                    </p>
+                    </div>
+                </div>
+                )
+            })
+        )
     }
   return (
     <div className='grid grid-cols-6'>
     <div className='mt-10 col-start-1 col-end-7 md:col-start-2 lg:col-start-2 lg:col-end-5'>
-    <form className='flex flex-1 flex-col' onSubmit={handleForm}>
-       
-        <textarea  id="var_1" rows="5" cols="10" wrap="soft" value={userInput.newPost} onChange={(e) => { setUserInput({'newPost':e.target.value}) }} type='text' placeholder="What's on your mind .." className='resize-none overflow-hidden h-auto rounded-2xl p-2 shadow-md w-full text-xl  outline-none' maxLength='256'></textarea>
-    </form>
-    <button onClick={handleForm} disabled={!userInput} className='p-3 m-3  bg-blue-500 text-white rounded-2xl text-2xl disabled:opacity-40'>UPDATE</button>
+    <div className="flex justify-center">
+  <div className="block p-6 rounded-lg shadow-lg bg-white w-full">
+    <p className="text-gray-700 text-2xl mb-4 font-bold">
+      {posts.newPost}
+    </p>
+    </div>
 </div>
+</div>
+<div className='mt-10 col-start-1 col-end-7 md:col-start-2 lg:col-start-2 lg:col-end-5'>
+    {posts.reply.length && <p className='font-bold mt-5 ml-5 text-xl'>Previous replies</p>}
+  {ret()}
+</div>
+
 </div>
   )
 }
@@ -67,4 +87,4 @@ export async function getServerSideProps(context){
   }
   }
 
-export default EditPost;
+export default RepliesPost;

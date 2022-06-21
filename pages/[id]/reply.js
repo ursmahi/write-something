@@ -11,7 +11,7 @@ function ReplyPost({posts,host}) {
       axios_url = `http://${host}/api/post/${id}`
     }
     else{
-      axios_url = `http://${host}/api/post/${id}`
+      axios_url = `https://${host}/api/post/${id}`
 
     }
     const handleForm=async(e)=>{
@@ -83,7 +83,7 @@ export async function getServerSideProps(context){
         axios_url = `http://${host}/api/post/${id}`
       }
       else{
-        axios_url = `http://${host}/api/post/${id}`
+        axios_url = `https://${host}/api/post/${id}`
 
       }
     const response = await axios(axios_url)

@@ -61,7 +61,7 @@ export async function getServerSideProps(context) {
       axios_url = `http://${host}/api/post/`
     }
     else{
-      axios_url = `http://${host}/api/post/`
+      axios_url = `https://${host}/api/post/`
 
     }
   const response = await axios(axios_url)

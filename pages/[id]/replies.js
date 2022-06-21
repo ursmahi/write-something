@@ -35,9 +35,10 @@ function RepliesPost({posts,host}) {
         return(
             posts.reply.map((reply)=>{
                 return(
+                  // add key prop in the div
                   <div className="flex justify-center mb-4" key={reply}>
                   <div className="block p-6 rounded-lg shadow-lg bg-white w-full ">
-                    <p className="text-gray-700 text-base mb-4 font-bold">
+                    <p className="text-gray-700 text-base mb-4 font-bold" key={reply}>
                       {reply}
                     </p>
                     </div>

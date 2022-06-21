@@ -35,7 +35,7 @@ function ReplyPost({posts,host}) {
         return(
             posts.reply.map((reply)=>{
                 return(
-                  <div className="flex justify-center mb-4">
+                  <div className="flex justify-center mb-4" key={reply}>
                   <div className="block p-6 rounded-lg shadow-lg bg-white w-full ">
                     <p className="text-gray-700 text-base mb-4 font-bold">
                       {reply}

@@ -1,17 +1,7 @@
 import axios from 'axios'
 import Link from 'next/link';
 export default function Home({posts}) {
-  const ret=()=>{
-    return(
-        posts.reply?.map((reply)=>{
-            return(
-                <p className='text-xl shadow-md p-2 m-2 border-x border-y'>
-                {reply}
-            </p>
-            )
-        })
-    )
-}
+
   return (
     <div className='grid grid-cols-6 overflow-x-hidden 	'>
       <div className='col-start-1 col-end-7 md:col-start-2 lg:col-start-2 lg:col-end-5'>
